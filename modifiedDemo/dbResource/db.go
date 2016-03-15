@@ -34,3 +34,12 @@ func GetDB() (*gorm.DB, error){
 	}
 	return pDB, err
 }
+//根据资源名返回资源对象
+func GetDBResourceObjectByName(resName string) (DBResource){
+	var obj DBResource
+	switch resName{
+	case "user":
+		obj = &User{}
+	}
+	return obj
+}

@@ -110,7 +110,7 @@ func (u *User) UpdateDBDataByID(id uint, strParams map[string]string) (status in
 		} else {
 			//修改属性
 			u.ModifyAttrWithParams(strParams)
-			//保持数据
+			//保存数据
 			(*pDB).Save(u)
 			status = 200
 			retJSON["id"] = u.ID
@@ -151,3 +151,4 @@ func (u *User) GetAttrNameList() ([]string) {
 	return []string{"name", "gender", "birthday"}
 }
 
+func (s []User) RetrieveDBDatasByParams()

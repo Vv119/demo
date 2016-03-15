@@ -6,15 +6,6 @@ import (
 	. "github.com/yuanpinda/modifiedDemo/dbResource"
 )
 
-//根据资源名获取资源对象
-func getDBResourceObjectByName(resName string) (DBResource){
-	var obj DBResource
-	switch resName{
-	case "user":
-		obj = &User{}		
-	}
-	return obj
-}
 
 //获取指定ID的资源
 func getResourceByID(c *gin.Context){
@@ -25,7 +16,7 @@ func getResourceByID(c *gin.Context){
 	id := StringToUint(idStr)
 	fmt.Println("getResourceByID", resourceName, id)
 	//根据资源名获取资源对象
-	resObject := getDBResourceObjectByName(resourceName)
+	resObject := GetDBResourceObjectByName(resourceName)
 	if resObject != nil {
 		status,retInfo,_ := resObject.RetrieveDBDataByID(id)
 		c.JSON(status, retInfo)
@@ -45,7 +36,7 @@ func updateResourceByID(c *gin.Context){
 	id := StringToUint(idStr)
 	fmt.Println("updateResourceByID", resourceName, id)
 	//根据资源名获取资源对象
-	resObject := getDBResourceObjectByName(resourceName)
+	resObject := GetDBResourceObjectByName(resourceName)
 	if resObject != nil {
 		attrNameList := resObject.GetAttrNameList()
 		formParams := make(map[string]string)
@@ -72,7 +63,7 @@ func deleteResourceByID(c *gin.Context){
 	id := StringToUint(idStr)
 	fmt.Println("deleteResourceByID", resourceName, id)
 	//根据资源名获取资源对象
-	resObject := getDBResourceObjectByName(resourceName)
+	resObject := GetDBResourceObjectByName(resourceName)
 	if resObject != nil {
 		status, retInfo,_ :=  resObject.DeleteDBDataByID(id)
 		c.JSON(status, retInfo)
@@ -89,7 +80,7 @@ func addResource(c *gin.Context){
 	resourceName := c.Param("resourceName")
 	fmt.Println("addResource", resourceName)
 	//根据资源名获取资源对象
-	resObject := getDBResourceObjectByName(resourceName)
+	resObject := GetDBResourceObjectByName(resourceName)
 	if resObject != nil {
 		attrNameList := resObject.GetAttrNameList()
 		formParams := make(map[string]string)

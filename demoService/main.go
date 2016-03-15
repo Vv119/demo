@@ -96,7 +96,8 @@ func deleteUserByID(c *gin.Context){
 	//数据库操作
 	if id > 0 {
 		user.ID = id
-		database.Delete(&user)
+	       	ret := database.Delete(&user)
+		fmt.Println("Delete ret:", ret)
 	} else {
 		opStatus = paramInvalid
 	}
@@ -233,6 +234,7 @@ func getUserByID(c *gin.Context){
 	//数据库操作
 	if id > 0 {
 		database.First(&user, id)
+		fmt.Println("Found ret:", user.ID)
 	} else {
 		opStatus = paramInvalid
 	}
